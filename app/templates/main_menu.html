@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+    <div class="container center">
+        <div class="col">
+        {% if languages %}
+            {% for language in languages %}
+                <p><a href="{{ url_for('education.get_topic_names', language = language.language) }}" class = "flash bg-danger"> {{ language.language }} </a></p>
+            {% endfor%}
+        {% endif %}
+
+        {% if topic_names %}
+            {% for topic_name in topic_names %}
+                <p><a href="{{ url_for('education.get_notes', language = language, topic_name = topic_name.topic_name) }}" class = "flash bg-danger"> {{ topic_name.topic_name }} </a></p>
+            {% endfor%}
+        {% endif %}
+
+        {% if notes %}
+            {% for note in notes %}
+                <p><a href="{{ url_for('education.get_note', language = language, topic_name = title, title = note.title ) }}" class = "flash bg-danger"> {{ note.title }} </a></p>
+            {% endfor%}
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
